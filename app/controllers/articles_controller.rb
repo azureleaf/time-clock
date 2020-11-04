@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
 
+    # On the /article/, list the Articles
     def index
         @articles = Article.all
       end
 
+    # Show article of specified id with the route params
     def show
         @article = Article.find(params[:id])
     end
@@ -16,8 +18,12 @@ class ArticlesController < ApplicationController
 
         @article = Article.new(article_params)
  
-        @article.save
-        redirect_to @article
+        if @article.save
+            redirect_to @article
+        else
+            # Force user get back to the register page if error
+            render 'new'
+        end
     end
 
     private
