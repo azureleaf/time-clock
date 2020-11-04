@@ -15,6 +15,8 @@
   - [Routing](#routing)
   - [Controller](#controller)
   - [Views](#views)
+  - [VS Code Extensions](#vs-code-extensions)
+    - [Ruby (by Peng Lv)](#ruby-by-peng-lv)
   - [Troubleshooting](#troubleshooting)
 
 ## Install Rbenv
@@ -198,7 +200,17 @@ destroy
 
 ```
 
+## VS Code Extensions
+
+```sh
+gem install rubocop
+```
+
+### Ruby (by Peng Lv)
+
+
 ## Troubleshooting
 
 - `node-gyp` fails because it tries to find `python2` in the environment variables.
-  - `npm install -g node-gyp`
+  - Downgrading node version from 15 to 10 worked.
+  - `npm install -g node-gyp` also worked? not sure.
