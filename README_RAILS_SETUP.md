@@ -28,14 +28,14 @@
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 
-# Automatically clone the rbenv to ~/.rbenv, and build it
+# This clones the rbenv to ~/.rbenv, and build it
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash
-
-# Add ~/.rbenv/shim in the path
-rbenv init
 
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 source ~/.bashrc
+
+# This adds ~/.rbenv/shim in the path
+rbenv init
 
 # validate installation
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
@@ -67,16 +67,21 @@ nvm use v14.15.0 # if necessary
 nvm ls # check current version
 
 # yarn
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-sudo apt install yarn
+# Procedure described in the official website using "apt install yarn" failed;
+# yarn installed by this gets "git+0.32" version which Ruby doesn't recognize correctly
+npm install -g yarn
 
 # rails
 gem install rails
-rails new my_project # Using hyphenation in the project name caused "Errno::EACCES: Permission denied @ rb_file_s_rename"
 
-# webpack
+# For new project:
+rails new my_project # Hyphenation in the project name (e.g. my-project) caused "Errno::EACCES: Permission denied @ rb_file_s_rename"
 rails webpacker:install
+
+# For existing project:
+bundle # Gemfile
+yarn # package.json
+rails migrate # if the app uses DB
 ```
 
 ## Tutorial
